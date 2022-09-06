@@ -24,7 +24,7 @@ namespace SimpleNeuralNetwork.Classes
             OutputPulse.Value = Activation(OutputPulse.Value);
 
         }
-        public void UpdateWeights(double newWeights)
+        public void UpdateWeights(double newWeights) //aktualizacja wag do nowych wartości w poszczególnych dendrytach
         {
 
             foreach(var terminal in Dendrites)
@@ -35,12 +35,21 @@ namespace SimpleNeuralNetwork.Classes
 
         private double Activation(double value)
         {
-            throw new NotImplementedException();
+            double threshold = 1;
+            return value >= threshold ? 0 : threshold;
         }
 
-        private double Sum()
+        private double Sum() // liczy wage każdego dendrytu
         {
-            throw new NotImplementedException();
+            double computerValue = 0.0f;
+
+            foreach (var d in Dendrites)
+            {
+                computerValue += d.InputPulse.Value * d.SynapticWeight;
+
+            }
+            return computerValue;
+
         }
     }
 }
