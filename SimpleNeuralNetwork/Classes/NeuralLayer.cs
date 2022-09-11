@@ -28,8 +28,16 @@ namespace SimpleNeuralNetwork.Classes
 
         public void Optimize(double learningRate,double delta)
         {
+            Weight += learningRate * delta;
+            foreach( var neuron in Neurons )
+            {
+                neuron.UpdateWeights(Weight);
+            }
 
-
+        }
+        public void Log()
+        {
+            Console.WriteLine("{0}, Weight: {1}", Name,Weight);
         }
 
     }
