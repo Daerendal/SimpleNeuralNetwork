@@ -16,6 +16,45 @@ namespace SimpleNeuralNetwork.Classes
         { 
             Layers = new List<NeuralLayer>(); 
         }
+        private void ComputeOutput()
+        {
+            bool first = true;
+
+            foreach (NeuralLayer layer in Layers)
+            {
+
+                // mija pierwszy szereg neuronów, ponieważ nie będzie on zmieniał ich wag - tylko każdą następna
+                if(first)
+                {
+                    first = false;
+                    continue;
+                }
+
+                layer.Forward();
+            }
+        }
+        private void OptimizeWeights(double accuracy)
+        {
+            float lr = 0.1f;
+            // jeśli dokładnosc jest 1, jest dobrze, jeśli dokładnośc jest ponad 1 - zmniejsza ją, jeśli jest mniejsza niż 1 - zwiększa ja
+
+            if (accuracy == 1)
+            {
+                return;
+            }
+            if (accuracy > 1)
+            {
+                lr = -lr;
+            }
+
+            foreach(NeuralLayer layer in Layers)
+            {
+
+                layer.Optimize(lr,1);
+            }
+
+
+        }
         public void AddLayer(NeuralLayer layer)
         {
             int dendriteCount = 1; // to mówi nam ile dendrytów otrzyma nastepny layer

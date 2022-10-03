@@ -14,6 +14,15 @@ namespace SimpleNeuralNetwork.Classes
 
         public double Weight { get; set; }
 
+        public void Forward()
+        {
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.Fire();
+            }
+
+        }
+
         public NeuralLayer(int count, double initialWeight, string name = "")
         {
             Neurons = new List<Neuron>();
